@@ -22,3 +22,40 @@ class Db_requests_basic:
             data = cursor.fetchall()
         connection.close()
         return data
+
+    def create_table_notes(self):
+        sql = """
+        CREATE TABLE Notes(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date text,
+        note text);
+        """
+        self.execute(sql, commit=True)
+
+
+    def add_note(self, date: str, note: str):
+        sql = 'INSERT INTO Notes(date, note) VALUES(?, ?)'
+        parameters = (date, note)
+        self.execute(sql, parameters, commit=True)
+
+    def select_note_info_by_id(self, id: int) -> list:
+        sql = 'SELECT * FROM Notes WHERE id=?'
+        return self.execute(sql, parameters=(id, ), fetchone=True)
+
+    def select_note_info_by_date(self, date: str) -> list:
+        sql = 'SELECT * FROM Notes WHERE date=?'
+        return self.execute(sql, parameters=(date, ), fetchone=True)
+
+    def update_note_by_id(self, id: int, date: str, note: str):
+        sql = 'UPDATE notes SET date=?, note=? WHERE id=?'
+        return self.execute(sql, parameters=(date, note, id), commit=True)
+
+    def select_all_note(self) -> list:
+        sql = 'SELECT * FROM Notes'
+        return self.execute(sql, fetchall=True)
+
+    def delete_note_by_id(self, id: int):
+        sql = "DELETE FROM Notes WHERE id=?"
+        return self.execute(sql, parameters=(id, ), commit=True)
+    def delete_all(self):
+        self.execute("DELETE FROM Notes WHERE True", commit=True)

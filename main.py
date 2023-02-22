@@ -1,6 +1,6 @@
 from controllers import Controller_basic
-from db_api import Db_requests_basic
 from models import Model_basic
+from db_api import Db_requests_basic
 from views import Tkinter_view_basic
 
 

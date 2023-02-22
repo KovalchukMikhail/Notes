@@ -11,5 +11,4 @@ class Controller_basic:
         self.model = model
 
     def run(self):
-        print('I am controller')
-        # self.model.print_hi()
+        self.model.try_create_db(self.db)
