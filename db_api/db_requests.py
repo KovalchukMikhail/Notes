@@ -40,11 +40,11 @@ class Db_requests_basic:
 
     def select_note_info_by_id(self, id: int) -> list:
         sql = 'SELECT * FROM Notes WHERE id=?'
-        return self.execute(sql, parameters=(id, ), fetchone=True)
+        return self.execute(sql, parameters=(id, ), fetchone=True).copy()
 
     def select_note_info_by_date(self, date: str) -> list:
         sql = 'SELECT * FROM Notes WHERE date=?'
-        return self.execute(sql, parameters=(date, ), fetchone=True)
+        return self.execute(sql, parameters=(date, ), fetchall=True).copy()
 
     def update_note_by_id(self, id: int, date: str, note: str):
         sql = 'UPDATE notes SET date=?, note=? WHERE id=?'
@@ -52,7 +52,7 @@ class Db_requests_basic:
 
     def select_all_note(self) -> list:
         sql = 'SELECT * FROM Notes'
-        return self.execute(sql, fetchall=True)
+        return self.execute(sql, fetchall=True).copy()
 
     def delete_note_by_id(self, id: int):
         sql = "DELETE FROM Notes WHERE id=?"
