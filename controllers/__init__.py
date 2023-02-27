@@ -1,1 +1,1 @@
-from .controller_basic import Controller_basic
+from .controller_basic.main_controller_basic import MainController

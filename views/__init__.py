@@ -1,1 +1,1 @@
-from .tkinter_view import Tkinter_view_basic
+from .view_console.view import ViewConsoleBasic as View

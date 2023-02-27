@@ -1,15 +1,15 @@
-from controllers import Controller_basic
-from models import Model_basic
-from db_api import Db_requests_basic
-from views import Tkinter_view_basic
+from controllers import MainController
+from data import DbRequests
+from models import Model
+from views import View
 
 
 
 if __name__ == '__main__':
-    path = 'db_api\database\database_note.db'
-    db = Db_requests_basic(path)
-    view = Tkinter_view_basic()
-    model = Model_basic()
-    controller = Controller_basic(db, view, model)
+    path = 'data\database_json\database_note.json'
+    db = DbRequests(path)
+    model = Model(db=db)
+    controller = MainController(model=model)
+    view = View(controller)
 
-    controller.run()
+    view.run_main_menu()

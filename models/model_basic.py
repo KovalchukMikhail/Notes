@@ -1,11 +1,23 @@
-import sqlite3
-import db_api
+from data import DbRequests
+from entities import Note
+class ModelBasic:
+    db: DbRequests
 
-class Model_basic:
-    def try_create_db(self, db):
-        try:
-            db.create_table_notes()
-        except sqlite3.OperationalError as e:
-            print(e)
-        except Exception as e:
-            print(e)
+    def __init__(self, db: DbRequests):
+        self.db = db
+    def try_create_db(self):
+        if not self.db.check_exist_table():
+            self.db.create_table()
+
+
+    def get_all_notes(self) -> list:
+        return self.db.select_all_notes()
+
+
+    def create_note(self, title: str, text: str) -> Note:
+        note = Note(title= title, text= text)
+        return note
+
+
+    def add_note_to_db(self, note: Note):
+        self.db.add_note(note= note)
