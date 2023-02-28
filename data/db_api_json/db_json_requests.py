@@ -48,7 +48,7 @@ class DbJsonRequests:
         notes_list: list = []
         if notes_data != []:
             for note in notes_data:
-                if title in note.get("title"):
+                if title in note.get("title").lower():
                     notes_list.append(Note(note_id=note.get("note_id"),
                                        title=note.get("title"),
                                        text=note.get("text"),
@@ -88,6 +88,11 @@ class DbJsonRequests:
                 return True
         return False
 
+    def remove_all_notes(self):
+        data: dict = self.__get_table()
+        notes_data: list = data.get("notes")
+        notes_data.clear()
+        self.__set_table(data)
 
 
     def add_note(self, note: Note):

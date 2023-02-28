@@ -21,3 +21,26 @@ class ModelBasic:
 
     def add_note_to_db(self, note: Note):
         self.db.add_note(note= note)
+
+    def get_notes_by_data(self, text: str) -> list:
+        return self.db.select_notes_by_date(text)
+
+    def get_notes_by_title(self, title: str) -> list:
+        return self.db.select_notes_by_title(title)
+
+    def get_note_by_id(self, id: int) -> Note:
+        return self.db.select_note_by_id(id)
+
+    def remove_note_by_id(self, id: int):
+        self.db.remove_note_by_id(id= id)
+
+    def remove_all_note(self):
+        self.db.remove_all_notes()
+
+    def change_note(self, title: str, text: str, note: Note) -> Note:
+        note.set_title(title)
+        note.set_text(text)
+        return note
+
+    def update_note(self, note: Note):
+        self.db.update_note(note)

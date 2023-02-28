@@ -39,7 +39,7 @@ class Note:
         self.set_date_of_change()
 
     def __get_data(self):
-        return datetime.datetime.today().strftime("%Y.%m.%d-%H:%M:%S")
+        return datetime.datetime.today().strftime("%d.%m.%Y-%H:%M:%S")
 
     def to_string(self) -> str:
         if self.__note_id !=0:
